@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#080e1b" />
+  <meta name="description" content="A pixel-art Pomodoro timer with study sessions, breaks, and a daily focus graph." />
+  <title>PIXEL POMO — a little focus, a little rest</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Press+Start+2P&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./styles.css" />
+  <script src="./app.js" defer></script>
+</head>
+<body data-mode="focus">
+  <canvas id="terminal-grid" aria-hidden="true"></canvas>
+  <div class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="./index.html" aria-label="Pixel Pomo home"><span class="brand-mark" aria-hidden="true">✳</span><span>PIXEL<span class="brand-accent">POMO</span><span class="brand-period">.</span></span></a>
+      <div class="topbar-right"><span class="live-dot" aria-hidden="true"></span><span id="header-status">READY TO FOCUS</span><span class="topbar-divider">/</span><span id="current-date"></span></div>
+    </header>
+
+    <main>
+      <section class="intro" aria-labelledby="page-title">
+        <div class="eyebrow"><span class="eyebrow-line"></span> YOUR LITTLE CORNER OF THE INTERNET <span class="eyebrow-line"></span></div>
+        <h1 id="page-title" class="scatter-heading" aria-label="MAKE TIME FOR WHAT MATTERS"><span>MAKE TIME FOR</span><span>WHAT <em>MATTERS</em><span class="heading-cursor">_</span></span></h1>
+        <p>One task. One timer. You've got this.</p>
+      </section>
+
+      <section class="workspace" aria-label="Pomodoro timer">
+        <div class="timer-panel">
+          <div class="panel-topline"><span class="panel-id">01 / THE TIMER</span><span class="corner-glyph" aria-hidden="true">+ + +</span></div>
+          <div class="mode-switch" role="group" aria-label="Timer mode">
+            <button class="mode-button active" data-select-mode="focus" type="button" aria-pressed="true">FOCUS</button>
+            <button class="mode-button" data-select-mode="short" type="button" aria-pressed="false">SHORT BREAK</button>
+            <button class="mode-button" data-select-mode="long" type="button" aria-pressed="false">LONG BREAK</button>
+          </div>
+          <div class="timer-display-wrap"><div class="timer-bloom" aria-hidden="true"></div><div class="timer-display" id="timer-display" role="timer" aria-label="25 minutes 0 seconds remaining">25:00</div><div class="timer-suffix">MIN : SEC</div></div>
+          <div class="timer-progress" role="progressbar" aria-label="Session progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div id="timer-progress-fill"></div></div>
+          <div class="timer-detail"><span id="mode-message">A fresh start is one click away.</span><span id="session-progress">SESSION 1 / 4</span></div>
+          <div class="timer-actions">
+            <button id="start-pause" class="action-button primary-action" type="button"><span id="start-icon" aria-hidden="true">▶</span><span id="start-label">START FOCUS</span></button>
+            <button id="reset" class="action-button icon-action" type="button" aria-label="Reset timer" title="Reset timer"><span aria-hidden="true">↺</span></button>
+            <button id="skip" class="action-button icon-action" type="button" aria-label="Skip to next session" title="Skip to next session"><span aria-hidden="true">⏭</span></button>
+          </div>
+          <div class="keyboard-tip">PRESS <kbd>SPACE</kbd> TO START OR PAUSE <span>·</span> <kbd>R</kbd> TO RESET</div>
+        </div>
+
+        <div class="scene-panel">
+          <div class="panel-topline"><span class="panel-id">02 / THE VIBE</span><span class="scene-status"><span class="scene-dot"></span><span id="scene-status-text">IN THE ZONE</span></span></div>
+          <div class="scene-canvas-wrap"><div class="scene-stars" aria-hidden="true"><i>✦</i><i>+</i><i>·</i><i>✧</i></div><canvas id="pixel-girl" width="320" height="272" role="img" aria-label="Pixel-art girl studying at her desk"></canvas><span class="scene-floor" aria-hidden="true"></span></div>
+          <div class="scene-caption"><span id="scene-caption-text">SHE'S ROOTING FOR YOU <span aria-hidden="true">♥</span></span><span class="caption-index">PIXEL PAL / 001</span></div>
+        </div>
+      </section>
+
+      <section class="dashboard" aria-label="Focus statistics">
+        <div class="dashboard-head"><div><div class="section-kicker">THE LONG GAME</div><h2>Little steps add up<span class="heading-dot">.</span></h2></div><p>Every square is a day you showed up.</p></div>
+        <div class="stat-row">
+          <div class="stat"><span class="stat-icon">✦</span><div><strong id="today-count">0</strong><span>SESSIONS TODAY</span></div></div>
+          <div class="stat"><span class="stat-icon pink">♥</span><div><strong id="streak-count">0</strong><span>DAY STREAK</span></div></div>
+          <div class="stat"><span class="stat-icon green">◈</span><div><strong id="total-count">0</strong><span>TOTAL FOCUS SESSIONS</span></div></div>
+        </div>
+        <div class="graph-header"><div class="graph-title"><span class="graph-icon" aria-hidden="true">▦</span><h3>YOUR FOCUS HISTORY</h3></div><span id="graph-range">LAST 14 WEEKS</span></div>
+        <div class="graph-scroll"><div class="graph-layout"><div class="weekdays" aria-hidden="true"><span>MON</span><span>WED</span><span>FRI</span></div><div id="contribution-grid" class="contribution-grid" role="img" aria-label="Focus sessions by day over the last 14 weeks"></div></div></div>
+        <div class="graph-footer"><span>CONSISTENCY BEATS PERFECTION <span aria-hidden="true">✳</span></span><div class="legend"><span>LESS</span><i class="level-0"></i><i class="level-1"></i><i class="level-2"></i><i class="level-3"></i><i class="level-4"></i><span>MORE</span></div></div>
+      </section>
+    </main>
+    <footer><span>MADE FOR THE SMALL WINS <span aria-hidden="true">♥</span></span><span>TAKE A BREATH. KEEP GOING.</span></footer>
+  </div>
+</body>
+</html>
