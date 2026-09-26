@@ -1,6 +1,8 @@
 # Pixel Pomo
 
 A retro pixel-art Pomodoro timer built with plain HTML, CSS, and JavaScript. No build step or account needed.
+<img width="2940" height="1654" alt="image" src="https://github.com/user-attachments/assets/a995f73c-c44f-4a3f-bc70-d8c09cc69c87" />
+
 
 ## Use it
 
